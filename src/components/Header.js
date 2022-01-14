@@ -1,8 +1,8 @@
-import { signOut, signInWithPopup } from "firebase/auth";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { signOut, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import {
   selectUser,
   setSignOut,
@@ -11,15 +11,27 @@ import {
 import { auth, provider } from "../firebase";
 
 const Header = () => {
+  const navigate = useNavigate();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  console.log(user);
+  //console.log(user);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        //console.log("user", user);
+        dispatch(setUserLogin(user));
+        navigate("/");
+      }
+    });
+  }, []);
 
   const signIn = () => {
     signInWithPopup(auth, provider)
       .then((res) => {
         //console.log(res);
         dispatch(setUserLogin(res.user));
+        navigate("/");
       })
       .catch((err) => console.log(err));
   };
@@ -29,6 +41,7 @@ const Header = () => {
       .then((res) => {
         //console.log(res);
         dispatch(setSignOut());
+        navigate("/login", { replace: true });
       })
       .catch((err) => console.log(err));
   };
