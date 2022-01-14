@@ -1,10 +1,23 @@
+import axios from "axios";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { setMovies } from "../features/movie/movieSlice";
 import ImgSlider from "./ImgSlider";
 import Movies from "./Movies";
 import Viewers from "./Viewers";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .get("https://api.npoint.io/8f00f397374785e70e1c")
+      .then((res) => {
+        //console.log("res", res.data.movies);
+        dispatch(setMovies(res.data.movies));
+      })
+      .catch((err) => console.log("err", err));
+  }, []);
   return (
     <Container>
       <ImgSlider />
@@ -21,6 +34,7 @@ const Container = styled.main`
   padding: 0 calc(3.5vw + 5px);
   position: relative;
   overflow-x: hidden;
+  overflow-y: hidden;
 
   &:before {
     content: "";
