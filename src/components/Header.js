@@ -1,13 +1,37 @@
+import { signOut, signInWithPopup } from "firebase/auth";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectUser } from "../features/user/userSlice";
+import {
+  selectUser,
+  setSignOut,
+  setUserLogin,
+} from "../features/user/userSlice";
+import { auth, provider } from "../firebase";
 
 const Header = () => {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
   console.log(user);
 
-  const signIn = () => {};
+  const signIn = () => {
+    signInWithPopup(auth, provider)
+      .then((res) => {
+        //console.log(res);
+        dispatch(setUserLogin(res.user));
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const signOutUser = () => {
+    signOut(auth)
+      .then((res) => {
+        //console.log(res);
+        dispatch(setSignOut());
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Nav>
@@ -44,7 +68,7 @@ const Header = () => {
               <span>SERIES</span>
             </a>
           </NavMenu>
-          <UserImg src="/images/user.jpg" />
+          <UserImg onClick={signOutUser} src={user.photoURL} />
         </>
       )}
     </Nav>

@@ -7,4 +7,8 @@ export const store = configureStore({
     movie: movieReducer,
     user: userReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

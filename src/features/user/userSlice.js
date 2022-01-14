@@ -11,9 +11,9 @@ const userSlice = createSlice({
     setUserLogin: (state, action) => {
       state.userObj = action.payload;
     },
-  },
-  setSignOut: (state) => {
-    state.userObj = {};
+    setSignOut: (state) => {
+      state.userObj = {};
+    },
   },
 });
 
