@@ -13,11 +13,14 @@
 
 <h4>Login page</h4>
 
-![Screenshot (159)]()
+![Screenshot (159)](https://github.com/wassim93/disney-clone/blob/master/Screenshot/login.png)
 
-<h4>Content</h4>
+<h4>Movie Detail</h4>
 
-![Screenshot (161)]()
+![Screenshot (161)](https://github.com/wassim93/disney-clone/blob/master/Screenshot/movie1%20detail.png)
+
+![Screenshot (162)](https://github.com/wassim93/disney-clone/blob/master/Screenshot/movie2%20detail.png)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
