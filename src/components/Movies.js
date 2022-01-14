@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { selectMovies } from "../features/movie/movieSlice";
 
@@ -9,11 +10,14 @@ const Movies = () => {
     <Container>
       <h4>Recommended For you</h4>
       <Content>
-        {movies.map((movie) => (
-          <Wrap key={movie.title}>
-            <img src={movie.backgroundImg} />
-          </Wrap>
-        ))}
+        {movies &&
+          movies.map((movie) => (
+            <Wrap key={movie.title}>
+              <Link to={`/detail/${movie.title}`}>
+                <img src={movie.cardImg} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );
